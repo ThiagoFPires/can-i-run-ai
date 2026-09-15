@@ -1,0 +1,26 @@
+# Node dependencies
+node_modules/
+frontend/node_modules/
+.npm/
+
+# Vite build cache
+.vite/
+frontend/.vite/
+
+# Python cache
+__pycache__/
+backend/app/__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+.venv/
+
+# Temporary test scripts
+backend/test_smoke.py
+
+# OS metadata
+.DS_Store
+Thumbs.db
