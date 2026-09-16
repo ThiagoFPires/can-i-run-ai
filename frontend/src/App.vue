@@ -16,12 +16,8 @@ const compatibleCount = ref(0)
 const loading = ref(true)
 const error = ref(null)
 
-const isSimulatorOpen = ref(false)
-const searchQuery = ref('')
-const selectedCategory = ref('all')
-const selectedStatus = ref('all')
-
-const API_BASE = 'http://127.0.0.1:8000'
+// Em produção ou com proxy do Vite, caminho relativo funciona tanto local quanto na nuvem
+const API_BASE = import.meta.env.VITE_API_URL || ''
 
 const fetchEvaluation = async () => {
   loading.value = true

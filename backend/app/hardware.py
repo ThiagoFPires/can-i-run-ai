@@ -15,6 +15,11 @@ def _get_cpu_name() -> str:
             res = subprocess.run(cmd, shell=True, capture_output=True, text=True, timeout=4)
             if res.returncode == 0 and res.stdout.strip():
                 return res.stdout.strip().split("\n")[0].strip()
+        elif platform.system() == "Linux":
+            with open("/proc/cpuinfo", "r") as f:
+                for line in f:
+                    if "model name" in line:
+                        return line.split(":")[1].strip()
     except Exception:
         pass
     return platform.processor() or "Processador Desconhecido"
