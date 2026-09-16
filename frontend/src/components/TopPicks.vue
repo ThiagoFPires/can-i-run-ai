@@ -1,6 +1,6 @@
 <script setup>
 import { ref } from 'vue'
-import { Terminal, Check, Sparkles } from 'lucide-vue-next'
+import { Terminal, Check, Flame } from 'lucide-vue-next'
 
 defineProps({
   picks: {
@@ -24,12 +24,12 @@ const copyCommand = (cmd, id) => {
 <template>
   <div v-if="picks.length > 0" class="mb-10">
     <div class="flex items-center gap-2 mb-4">
-      <Sparkles class="w-4 h-4 text-zinc-300" />
+      <Flame class="w-4 h-4 text-amber-400" />
       <h2 class="text-base font-bold text-white tracking-wide uppercase">
         Recomendações Ideais para o seu PC
       </h2>
-      <span class="text-xs px-2.5 py-0.5 rounded-md bg-zinc-900 text-zinc-300 border border-zinc-800 font-medium">
-        Roda Fluido
+      <span class="text-xs px-2.5 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/25 font-medium">
+        Roda com Fluidez
       </span>
     </div>
 
@@ -57,9 +57,9 @@ const copyCommand = (cmd, id) => {
             {{ pick.model.description }}
           </p>
 
-          <div class="mt-3 py-1.5 px-2.5 rounded-lg bg-zinc-900 border border-zinc-800 flex items-center justify-between text-xs">
+          <div class="mt-3 py-1.5 px-2.5 rounded-lg bg-zinc-900/90 border border-zinc-800 flex items-center justify-between text-xs">
             <span class="text-zinc-500">Velocidade:</span>
-            <span class="font-semibold text-zinc-200 font-mono">{{ pick.estimated_speed.split('(')[0] }}</span>
+            <span class="font-semibold text-emerald-400 font-mono">{{ pick.estimated_speed ? pick.estimated_speed.split('(')[0] : 'Rápido' }}</span>
           </div>
         </div>
 
@@ -73,7 +73,7 @@ const copyCommand = (cmd, id) => {
               class="p-2 rounded-lg bg-white hover:bg-zinc-200 text-black transition active:scale-95 shrink-0 shadow-sm"
               :title="copiedId === pick.model_id ? 'Copiado!' : 'Copiar comando Ollama'"
             >
-              <Check v-if="copiedId === pick.model_id" class="w-3.5 h-3.5" />
+              <Check v-if="copiedId === pick.model_id" class="w-3.5 h-3.5 text-emerald-600" />
               <Terminal v-else class="w-3.5 h-3.5" />
             </button>
           </div>

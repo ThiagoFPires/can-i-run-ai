@@ -43,7 +43,7 @@ const hasCuda = computed(() => {
       </div>
     </div>
 
-    <!-- RAM Card -->
+    <!-- RAM Card (Com barra colorida estilo Dashboard: Verde/Amarelo/Vermelho) -->
     <div class="neutral-card p-4 rounded-2xl">
       <div class="flex items-center justify-between mb-2">
         <span class="text-xs font-semibold uppercase tracking-wider text-zinc-400">Memória RAM</span>
@@ -54,14 +54,15 @@ const hasCuda = computed(() => {
       <div class="flex items-baseline gap-1.5">
         <span class="text-2xl font-bold text-white">{{ hardware?.ram_total_gb || 0 }}</span>
         <span class="text-sm font-medium text-zinc-400">GB Total</span>
-        <span class="text-xs text-zinc-300 ml-auto font-mono">
+        <span class="text-xs text-emerald-400 ml-auto font-mono font-medium">
           {{ hardware?.ram_available_gb || 0 }} GB Livre
         </span>
       </div>
-      <!-- Progress Bar (Monochrome) -->
+      <!-- Progress Bar colorida conforme nível de uso -->
       <div class="mt-3 w-full bg-zinc-800 rounded-full h-1.5 overflow-hidden">
         <div
-          class="h-full rounded-full transition-all duration-500 bg-white"
+          class="h-full rounded-full transition-all duration-500"
+          :class="ramPercent > 85 ? 'bg-rose-500' : ramPercent > 70 ? 'bg-amber-500' : 'bg-emerald-500'"
           :style="{ width: `${ramPercent}%` }"
         ></div>
       </div>
@@ -88,18 +89,19 @@ const hasCuda = computed(() => {
           <span class="text-xs font-medium text-zinc-400">GB VRAM</span>
         </div>
         <div>
+          <!-- Status Verde para CUDA e Amarelo para CPU -->
           <span
             v-if="hasCuda"
-            class="inline-flex items-center gap-1 px-2 py-0.5 rounded-md text-[11px] font-semibold bg-zinc-800 border border-zinc-600 text-white"
+            class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/25"
           >
-            <Zap class="w-3 h-3" /> CUDA Ativo
+            <Zap class="w-3 h-3 text-emerald-400" /> CUDA Ativo
           </span>
           <span
             v-else
-            class="inline-flex items-center gap-1 px-2 py-0.5 rounded-md text-[11px] font-medium bg-zinc-900 border border-zinc-800 text-zinc-400"
+            class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-medium bg-amber-500/10 text-amber-300 border border-amber-500/25"
             title="Inferência será realizada via CPU"
           >
-            <ZapOff class="w-3 h-3" /> Modo CPU
+            <ZapOff class="w-3 h-3 text-amber-400" /> Modo CPU
           </span>
         </div>
       </div>
@@ -118,7 +120,7 @@ const hasCuda = computed(() => {
         <span class="text-sm font-medium text-zinc-400">GB Livres</span>
       </div>
       <div class="mt-2 text-xs text-zinc-400 flex items-center gap-1.5">
-        <CheckCircle2 class="w-3.5 h-3.5 text-zinc-300" />
+        <CheckCircle2 class="w-3.5 h-3.5 text-emerald-400" />
         <span>Espaço para pesos GGUF</span>
       </div>
     </div>
